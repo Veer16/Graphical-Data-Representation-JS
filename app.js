@@ -1,5 +1,8 @@
 // created a new variable to hold the label values for the x-axis
 const xlabels = [];
+
+// y-axis lables and data
+const ytemps = [];
 chartIt();
 getData();
 
@@ -11,18 +14,18 @@ async function chartIt() {
     const ctx = document.getElementById('chart').getContext('2d');
 
     const myChart = new Chart(ctx, {
-        type: 'bar',
+
+        // change the graph from bar to line
+        type: 'line',
         data: {
             labels: xlabels,
             datasets: [{
-                label: 'Global average Temerature',
-                data: [12, 19, 3, 5, 2, 3],
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)'
-                ],
+                label: 'Combined Land-Surface Air and Sea-Surface Water Temperature in °C',
+                data: ytemps,
+                // add the fill option for the line graph
+                fill: false,
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 1
             }]
         }
@@ -45,8 +48,12 @@ async function getData() {
         const year = columns[0];
         // pushing the lable onto the chart
         xlabels.push(year);
+
         console.log("year:", year);
         const temp = columns[1];
+        // add the temp into the ytemp varibale
+        // also add 14 to make the temprature to from the mean temprature
+        ytemps.push(parseFloat(temp) + 14);
         console.log("temp:", temp);
     });
 }
