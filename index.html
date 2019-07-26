@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Graphical form</title>
+  </head>
+
+  <body>
+    <script>
+      getData();
+      async function getData() {
+        const response = await fetch("ZonAnn.Ts+dSST.csv");
+        const data = await response.text();
+
+        //  split the rows and delete the first row with the header
+
+        const rows = data.split("\n").slice(1);
+        console.log("rows:", rows);
+        // loop to get the data from each cell
+        rows.forEach(elt => {
+          const row = elt.split(",");
+          const year = row[0];
+          console.log("year:", year);
+          const temp = row[1];
+          console.log("temp:", temp);
+        });
+      }
+    </script>
+  </body>
+</html>
